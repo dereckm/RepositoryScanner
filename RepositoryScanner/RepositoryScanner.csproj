@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2004F58B-E398-4BF4-9536-1F4781EED6C0}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>RepositoryScanner</RootNamespace>
+    <AssemblyName>RepositoryScanner</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Build" />
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Logging, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Extensions.Logging.3.3.0\lib\net45\Ninject.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Logging.Serilog, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Extensions.Logging.Serilog.3.3.0\lib\net45\Ninject.Extensions.Logging.Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.7.1\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Console, Version=3.1.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.Console.3.1.1\lib\net45\Serilog.Sinks.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.File.4.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="V1\FileInProject.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="V1\ProjectInSolution.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="V1\RepositoryScanner.cs" />
+    <Compile Include="V1\RepositoryScanResult.cs" />
+    <Compile Include="V2\Analysis\EmptyProjectAnalyzer.cs" />
+    <Compile Include="V2\Analysis\EmptySolutionAnalyzer.cs" />
+    <Compile Include="V2\Analysis\FileNeverReferencedAnalyzer.cs" />
+    <Compile Include="V2\Analysis\FileReferencedByMultipleProjectsAnalyzer.cs" />
+    <Compile Include="V2\Analysis\IAnalyzer.cs" />
+    <Compile Include="V2\Analysis\Problem.cs" />
+    <Compile Include="V2\Analysis\ProjectNotReferencedInAnySolutionAnalyzer.cs" />
+    <Compile Include="V2\Analysis\ProjectReferencesFileInAnotherRepositoryAnalyzer.cs" />
+    <Compile Include="V2\Analysis\ReferencedFileNotFoundAnalyzer.cs" />
+    <Compile Include="V2\FileExplorer\DefaultFileVisitorFilter.cs" />
+    <Compile Include="V2\FileExplorer\FileVisitor.cs" />
+    <Compile Include="V2\FileExplorer\IFileVisitorFilter.cs" />
+    <Compile Include="V2\ScanningModule.cs" />
+    <Compile Include="V2\StructureParsing\CSharpProjectParser.cs" />
+    <Compile Include="V2\StructureParsing\CSharpProjectParser2.cs" />
+    <Compile Include="V2\StructureParsing\IParser.cs" />
+    <Compile Include="V2\StructureParsing\SolutionParser.cs" />
+    <Compile Include="V2\Structure\CodeBase.cs" />
+    <Compile Include="V2\Structure\CodeBaseItem.cs" />
+    <Compile Include="V2\Structure\ProblemFinder.cs" />
+    <Compile Include="V2\Structure\Project.cs" />
+    <Compile Include="V2\Structure\Repository.cs" />
+    <Compile Include="V2\Structure\Solution.cs" />
+    <Compile Include="V2\Structure\SourceFile.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

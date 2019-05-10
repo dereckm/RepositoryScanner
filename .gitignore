@@ -1,0 +1,6 @@
+bin/
+*.lock
+.vs/
+.git/
+obj/
+*.DotSettings.user

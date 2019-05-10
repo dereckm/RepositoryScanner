@@ -1,0 +1,269 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ninject.Extensions.Logging.Serilog</name>
+    </assembly>
+    <members>
+        <member name="T:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger">
+            <summary>
+            A logger that integrates with serilog, passing all messages to a <see cref="T:Serilog.ILogger"/>.
+            </summary>
+        </member>
+        <member name="F:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.serilogLogger">
+            <summary>
+            Serilog logger.
+            </summary>
+        </member>
+        <member name="F:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.name">
+            <summary>
+            Logger name.
+            </summary>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger"/> class.
+            </summary>
+            <param name="type">The type to create a logger for.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger"/> class.
+            </summary>
+            <param name="name">A custom name to use for the logger.  If null, the type's FullName will be used.</param>
+        </member>
+        <member name="P:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Name">
+            <summary>
+            Gets the name of the logger.
+            </summary>
+            <value>The name of the logger.</value>
+        </member>
+        <member name="P:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.IsDebugEnabled">
+            <summary>
+            Gets a value indicating whether messages with Debug severity should be logged.
+            </summary>
+        </member>
+        <member name="P:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.IsInfoEnabled">
+            <summary>
+            Gets a value indicating whether messages with Info severity should be logged.
+            </summary>
+        </member>
+        <member name="P:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.IsTraceEnabled">
+            <summary>
+            Gets a value indicating whether messages with Trace severity should be logged.
+            </summary>
+        </member>
+        <member name="P:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.IsWarnEnabled">
+            <summary>
+            Gets a value indicating whether messages with Warn severity should be logged.
+            </summary>
+        </member>
+        <member name="P:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.IsErrorEnabled">
+            <summary>
+            Gets a value indicating whether messages with Error severity should be logged.
+            </summary>
+        </member>
+        <member name="P:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.IsFatalEnabled">
+            <summary>
+            Gets a value indicating whether messages with Fatal severity should be logged.
+            </summary>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Debug(System.Exception,System.String,System.Object[])">
+            <summary>
+            Logs the specified exception with Debug severity.
+            </summary>
+            <param name="exception">The exception to log.</param>
+            <param name="format">The message or format template.</param>
+            <param name="args">Any arguments required for the format template.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.DebugException(System.String,System.Exception)">
+            <summary>
+            Logs the specified exception with Debug severity.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="exception">The exception to log.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Info(System.String)">
+            <summary>
+            Logs the specified message with Info severity.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Debug(System.String)">
+            <summary>
+            Logs the specified message with Debug severity.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Debug(System.String,System.Object[])">
+            <summary>
+            Logs the specified message with Debug severity.
+            </summary>
+            <param name="format">The message or format template.</param>
+            <param name="args">Any arguments required for the format template.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Error(System.Exception,System.String,System.Object[])">
+            <summary>
+            Logs the specified exception with Error severity.
+            </summary>
+            <param name="exception">The exception to log.</param>
+            <param name="format">The message or format template.</param>
+            <param name="args">Any arguments required for the format template.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.ErrorException(System.String,System.Exception)">
+            <summary>
+            Logs the specified exception with Error severity.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="exception">The exception to log.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Fatal(System.String)">
+            <summary>
+            Logs the specified message with Fatal severity.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.WarnException(System.String,System.Exception)">
+            <summary>
+            Logs the specified message with Warn severity.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="exception">The exception to log.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Error(System.String)">
+            <summary>
+            Logs the specified message with Error severity.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Error(System.String,System.Object[])">
+            <summary>
+            Logs the specified message with Error severity.
+            </summary>
+            <param name="format">The message or format template.</param>
+            <param name="args">Any arguments required for the format template.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Fatal(System.String,System.Object[])">
+            <summary>
+            Logs the specified message with Fatal severity.
+            </summary>
+            <param name="format">The message or format template.</param>
+            <param name="args">Any arguments required for the format template.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Fatal(System.Exception,System.String,System.Object[])">
+            <summary>
+            Logs the specified exception with Fatal severity.
+            </summary>
+            <param name="exception">The exception to log.</param>
+            <param name="format">The message or format template.</param>
+            <param name="args">Any arguments required for the format template.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.FatalException(System.String,System.Exception)">
+            <summary>
+            Logs the specified exception with Fatal severity.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="exception">The exception to log.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Info(System.String,System.Object[])">
+            <summary>
+            Logs the specified message with Info severity.
+            </summary>
+            <param name="format">The message or format template.</param>
+            <param name="args">Any arguments required for the format template.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Info(System.Exception,System.String,System.Object[])">
+            <summary>
+            Logs the specified exception with Info severity.
+            </summary>
+            <param name="exception">The exception to log.</param>
+            <param name="format">The message or format template.</param>
+            <param name="args">Any arguments required for the format template.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.InfoException(System.String,System.Exception)">
+            <summary>
+            Logs the specified exception with Info severity.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="exception">The exception to log.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Trace(System.String)">
+            <summary>
+            Logs the specified message with Trace severity.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Trace(System.String,System.Object[])">
+            <summary>
+            Logs the specified message with Trace severity.
+            </summary>
+            <param name="format">The message or format template.</param>
+            <param name="args">Any arguments required for the format template.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Trace(System.Exception,System.String,System.Object[])">
+            <summary>
+            Logs the specified exception with Trace severity.
+            </summary>
+            <param name="exception">The exception to log.</param>
+            <param name="format">The message or format template.</param>
+            <param name="args">Any arguments required for the format template.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.TraceException(System.String,System.Exception)">
+            <summary>
+            Logs the specified exception with Trace severity.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="exception">The exception to log.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Warn(System.String)">
+            <summary>
+            Logs the specified message with Warn severity.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Warn(System.String,System.Object[])">
+            <summary>
+            Logs the specified message with Warn severity.
+            </summary>
+            <param name="format">The message or format template.</param>
+            <param name="args">Any arguments required for the format template.</param>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger.Warn(System.Exception,System.String,System.Object[])">
+            <summary>
+            Logs the specified exception with Warn severity.
+            </summary>
+            <param name="exception">The exception to log.</param>
+            <param name="format">The message or format template.</param>
+            <param name="args">Any arguments required for the format template.</param>
+        </member>
+        <member name="T:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLoggerFactory">
+            <summary>
+            An implementation of a logger factory that creates <see cref="T:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLogger"/>s.
+            </summary>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLoggerFactory.CreateLogger(System.Type)">
+            <summary>
+            Creates a logger for the specified type.
+            </summary>
+            <param name="type">The type to create the logger for.</param>
+            <returns>The newly-created logger.</returns>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.Infrastructure.SerilogLoggerFactory.CreateLogger(System.String)">
+            <summary>
+            Creates a logger with the specified name.
+            </summary>
+            <param name="name">The explicit name to create the logger for.  If null, the type's FullName will be used.</param>
+            <returns>The newly-created logger.</returns>
+        </member>
+        <member name="T:Ninject.Extensions.Logging.Serilog.SerilogModule">
+            <summary>
+            Extends the functionality of the kernel, providing integration between the Ninject
+            logging infrastructure and nlog.
+            </summary>
+        </member>
+        <member name="M:Ninject.Extensions.Logging.Serilog.SerilogModule.Load">
+            <summary>
+            Loads the module into the kernel.
+            </summary>
+        </member>
+    </members>
+</doc>
