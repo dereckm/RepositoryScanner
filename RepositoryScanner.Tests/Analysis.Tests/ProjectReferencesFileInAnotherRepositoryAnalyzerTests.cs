@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
-using RepositoryScanner.V2.Analysis;
-using RepositoryScanner.V2.Structure;
+using RepositoryScanner.Scanning.Analysis.Analyzers;
+using RepositoryScanner.Scanning.Analysis.Analyzers.Structure;
+using RepositoryScanner.Scanning.Structure;
 
 namespace RepositoryScanner.Tests.Analysis.Tests
 {
@@ -12,7 +10,7 @@ namespace RepositoryScanner.Tests.Analysis.Tests
     public class ProjectReferencesFileInAnotherRepositoryAnalyzerTests
     {
         private CodeBase _codeBase;
-        private IAnalyzer _analyzer;
+        private IAnalyzer<CodeBase> _analyzer;
         private Repository _repository;
 
         [SetUp]

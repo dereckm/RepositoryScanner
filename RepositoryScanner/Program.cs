@@ -1,14 +1,10 @@
 ﻿using System;
-using System.IO;
-using System.Security.Cryptography;
+using System.Diagnostics;
 using Ninject;
-using Ninject.Extensions.Logging;
-using Ninject.Extensions.Logging.Serilog.Infrastructure;
-using Ninject.Parameters;
-using RepositoryScanner.V2;
-using RepositoryScanner.V2.Analysis;
-using RepositoryScanner.V2.FileExplorer;
-using RepositoryScanner.V2.Structure;
+using RepositoryScanner.Scanning;
+using RepositoryScanner.Scanning.Analysis;
+using RepositoryScanner.Scanning.FileExplorer;
+using ILogger = Ninject.Extensions.Logging.ILogger;
 
 namespace RepositoryScanner
 {
@@ -16,40 +12,38 @@ namespace RepositoryScanner
     {
         static void Main(string[] args)
         {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            Console.WriteLine("############ STARTING UP... ############");
             IKernel kernel = new StandardKernel(new ScanningModule());
-            var designPath = @"C:\Source\Design";
-            var commonPath = @"C:\Source\Common";
-            var unityPath = @"C:\Source\Unity";
-            var fileVisitor = kernel.Get<FileVisitor>();
+            ILogger logger = kernel.Get<ILogger>();
 
-            fileVisitor.Visit(designPath);
-            fileVisitor.Visit(commonPath);
-            fileVisitor.Visit(unityPath);
+            Console.WriteLine("############ SCANNING FILES... ############");
+            var fileVisitor = kernel.Get<RepositoryVisitor>();
+            fileVisitor.Visit();
 
             var codeBase = fileVisitor.GetCodeBase();
 
-            var problemFinder = new ProblemFinder(codeBase);
+            var problemFinder = kernel.Get<ProblemFinder>();
 
-            var logger = new SerilogLogger("Scanner");
-
-            problemFinder.AddAnalyzer(new FileReferencedByMultipleProjectsAnalyzer());
-            problemFinder.AddAnalyzer(new FileNeverReferencedAnalyzer());
-            problemFinder.AddAnalyzer(new EmptyProjectAnalyzer());
-            problemFinder.AddAnalyzer(new EmptySolutionAnalyzer());
-            problemFinder.AddAnalyzer(new ReferencedFileNotFoundAnalyzer());
-            problemFinder.AddAnalyzer(new ProjectNotReferencedInAnySolutionAnalyzer());
-            problemFinder.AddAnalyzer(new ProjectReferencesFileInAnotherRepositoryAnalyzer());
-
+            Console.WriteLine("############ ANALYZING... ############");
             var totalProblems = 0;
-            foreach (var problem in problemFinder.Execute())
+            foreach (var problem in problemFinder.FindProblems(codeBase))
             {
                 logger.Error($"{problem.Name} => {problem.Description}");
                 totalProblems++;
             }
+            stopwatch.Stop();
 
-            logger.Info($"Total problems found: {totalProblems}.");
+            if (totalProblems > 0)
+            {
+                logger.Info($"Total problems found: {totalProblems}.");
+                logger.Info($"Found in: {stopwatch.Elapsed.TotalSeconds}s.");
+            }
 
             Console.WriteLine("############ DONE ############");
+            Console.WriteLine($"############ EXECUTION TIME : {stopwatch.Elapsed.TotalSeconds}s ############");
+
             Console.ReadLine();
 
 

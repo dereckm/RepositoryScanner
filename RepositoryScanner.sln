@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryScanner", "RepositoryScanner\RepositoryScanner.csproj", "{2004F58B-E398-4BF4-9536-1F4781EED6C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryScanner.Tests", "RepositoryScanner.Tests\RepositoryScanner.Tests.csproj", "{B259FDCE-CA3C-482C-B9DF-0E548AB579CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryScanner.Tests", "RepositoryScanner.Tests\RepositoryScanner.Tests.csproj", "{B259FDCE-CA3C-482C-B9DF-0E548AB579CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryScanComparer", "RepositoryScanComparer\RepositoryScanComparer.csproj", "{9F3EBBA9-C057-4EDC-A9BB-1F3DB794FE11}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryScanner", "RepositoryScanner\RepositoryScanner.csproj", "{F6AF4715-C3B1-4938-A6FB-48158E51EFE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryReaders", "RepositoryReaders\RepositoryReaders.csproj", "{ABF5A60C-F92D-4CE0-AFE6-F5CCB12CD99B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +17,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2004F58B-E398-4BF4-9536-1F4781EED6C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2004F58B-E398-4BF4-9536-1F4781EED6C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2004F58B-E398-4BF4-9536-1F4781EED6C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2004F58B-E398-4BF4-9536-1F4781EED6C0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B259FDCE-CA3C-482C-B9DF-0E548AB579CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B259FDCE-CA3C-482C-B9DF-0E548AB579CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B259FDCE-CA3C-482C-B9DF-0E548AB579CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B259FDCE-CA3C-482C-B9DF-0E548AB579CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F3EBBA9-C057-4EDC-A9BB-1F3DB794FE11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F3EBBA9-C057-4EDC-A9BB-1F3DB794FE11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F3EBBA9-C057-4EDC-A9BB-1F3DB794FE11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F3EBBA9-C057-4EDC-A9BB-1F3DB794FE11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6AF4715-C3B1-4938-A6FB-48158E51EFE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6AF4715-C3B1-4938-A6FB-48158E51EFE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6AF4715-C3B1-4938-A6FB-48158E51EFE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6AF4715-C3B1-4938-A6FB-48158E51EFE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABF5A60C-F92D-4CE0-AFE6-F5CCB12CD99B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABF5A60C-F92D-4CE0-AFE6-F5CCB12CD99B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABF5A60C-F92D-4CE0-AFE6-F5CCB12CD99B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABF5A60C-F92D-4CE0-AFE6-F5CCB12CD99B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
