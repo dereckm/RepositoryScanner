@@ -2,6 +2,7 @@
 using Ninject.Extensions.Logging.Serilog.Infrastructure;
 using Ninject.Modules;
 using RepositoryReaders.Directory;
+using RepositoryReaders.Path;
 using RepositoryReaders.Text;
 using Serilog;
 using ILogger = Ninject.Extensions.Logging.ILogger;
@@ -18,6 +19,7 @@ namespace RepositoryScanComparer.ScanComparison
             Bind<ILogger>().ToMethod((context) => new SerilogLogger("Comparer"));
             Bind<IFileReader>().To<DefaultFileReader>();
             Bind<IDirectoryReader>().To<DefaultDirectoryReader>();
+            Bind<IPathReader>().To<DefaultPathReader>();
         }
     }
 }

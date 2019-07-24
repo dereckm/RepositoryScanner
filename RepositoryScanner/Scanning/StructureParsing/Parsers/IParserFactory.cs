@@ -2,6 +2,6 @@
 {
     public interface IParserFactory<out T>
     {
-        T CreateParser(string path);
+        IParser<T> CreateParser(string path);
     }
 }

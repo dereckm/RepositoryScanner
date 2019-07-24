@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using RepositoryReaders.Path;
 using RepositoryReaders.Text;
 using RepositoryScanner.Scanning.Structure;
 
@@ -14,12 +15,14 @@ namespace RepositoryScanner.Scanning.Analysis.Analyzers.Files
     public class FileAnalyzer : CSharpSyntaxWalker, IAnalyzer<CodeBase>
     {
         private readonly IFileReader _fileReader;
+        private readonly IPathReader _pathReader;
         private readonly ConcurrentQueue<Problem> _problems = new ConcurrentQueue<Problem>();
         private readonly List<IAnalyzer> _analyzers = new List<IAnalyzer>();
 
-        public FileAnalyzer(IFileReader fileReader)
+        public FileAnalyzer(IFileReader fileReader, IPathReader pathReader)
         {
             _fileReader = fileReader;
+            _pathReader = pathReader;
         }
 
         public IEnumerable<Problem> FindProblems(CodeBase codeBase)
@@ -31,7 +34,7 @@ namespace RepositoryScanner.Scanning.Analysis.Analyzers.Files
 
             _problems.Clear();
 
-            Parallel.ForEach(codeBase.SourceFiles.Select(x => x.Path).Where(p => Path.GetExtension(p) == ".cs"), (path) =>
+            Parallel.ForEach(codeBase.SourceFiles.Select(x => x.Path).Where(p => _pathReader.GetExtension(p) == ".cs"), (path) =>
             {
                 var content = _fileReader.ReadAllText(path);
 

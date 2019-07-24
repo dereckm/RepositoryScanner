@@ -1,36 +1,40 @@
 ﻿using System.IO;
 using RepositoryReaders.Directory;
+using RepositoryReaders.Path;
 using RepositoryScanner.Scanning.Structure;
 using RepositoryScanner.Scanning.StructureParsing.Parsers;
 
 namespace RepositoryScanner.Scanning.FileExplorer
 {
-    public class RepositoryVisitor
+    public class RepositoryVisitor : IRepositoryVisitor
     {
         private readonly  CodeBase _codeBase = new CodeBase();
         private readonly IRepositoryVisitorFilter _defaultRepositoryVisitorFilter;
-        private readonly IParser<Solution> _solutionParser;
-        private readonly IParserFactory<IParser<Project>> _projectParserFactory;
+        private readonly IParserFactory<Solution> _solutionParserFactory;
+        private readonly IParserFactory<Project> _projectParserFactory;
         private readonly IDirectoryReader _directoryReader;
+        private readonly IPathReader _pathReader;
         private readonly IRepositoryRegistry _repositoryRegistry;
 
         public RepositoryVisitor(
             IRepositoryVisitorFilter defaultRepositoryVisitorFilter, 
-            IParser<Solution> solutionParser, 
+            IParserFactory<Solution> solutionParserFactory, 
             IRepositoryRegistry repositoryRegistry, 
-            IParserFactory<IParser<Project>> projectParserFactory,
-            IDirectoryReader directoryReader)
+            IParserFactory<Project> projectParserFactory,
+            IDirectoryReader directoryReader,
+            IPathReader pathReader)
         {
             _defaultRepositoryVisitorFilter = defaultRepositoryVisitorFilter;
-            _solutionParser = solutionParser;
+            _solutionParserFactory = solutionParserFactory;
             _repositoryRegistry = repositoryRegistry;
             _projectParserFactory = projectParserFactory;
             _directoryReader = directoryReader;
+            _pathReader = pathReader;
         }
 
         public void Visit()
         {
-            while (_repositoryRegistry.TryGetNext(out Repository repository))
+            foreach(var repository in _repositoryRegistry)
             {
                 _codeBase.Repositories.Add(repository);
                 VisitFiles(repository.Path);
@@ -43,7 +47,7 @@ namespace RepositoryScanner.Scanning.FileExplorer
             {
                 VisitFile(file);
 
-                var extension = Path.GetExtension(file);
+                var extension = _pathReader.GetExtension(file);
 
                 if (_defaultRepositoryVisitorFilter.IsSolutionFile(extension))
                 {
@@ -67,7 +71,9 @@ namespace RepositoryScanner.Scanning.FileExplorer
 
         protected virtual void VisitSolution(string solutionPath)
         {
-            var solution = _solutionParser.Parse(solutionPath);
+            var parser = _solutionParserFactory.CreateParser(solutionPath);
+
+            var solution = parser.Parse(solutionPath);
 
             _codeBase.Solutions.Add(solution);
         }
@@ -77,6 +83,7 @@ namespace RepositoryScanner.Scanning.FileExplorer
             var parser = _projectParserFactory.CreateParser(projectPath);
 
             var project = parser.Parse(projectPath);
+
             project.Repository = _repositoryRegistry.Current;
 
             _codeBase.Projects.Add(project);
@@ -94,7 +101,7 @@ namespace RepositoryScanner.Scanning.FileExplorer
         {
             const string temporaryFilePrefix = "TemporaryGeneratedFile";
 
-            var fileName = Path.GetFileName(sourceFilePath);
+            var fileName = _pathReader.GetFileName(sourceFilePath);
 
             var fileNameParts = fileName.Split('_');
 

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using RepositoryReaders.Directory;
+using RepositoryReaders.Path;
 using RepositoryReaders.Text;
 using RepositoryScanner.Scanning.Structure;
 
@@ -13,12 +14,14 @@ namespace RepositoryScanner.Scanning.StructureParsing.Parsers.Solutions
     {
         private readonly IFileReader _fileReader;
         private readonly IDirectoryReader _directoryReader;
+        private readonly IPathReader _pathReader;
         private const string PROJECT_INCLUDE_REGEX = "Project\\(\"{\\S+}\"\\) = \"\\S+\", \"\\S+\"";
 
-        public SolutionParser(IFileReader fileReader, IDirectoryReader directoryReader)
+        public SolutionParser(IFileReader fileReader, IDirectoryReader directoryReader, IPathReader pathReader)
         {
             _fileReader = fileReader;
             _directoryReader = directoryReader;
+            _pathReader = pathReader;
         }
 
         private const string FOLDER_UP_ONE_LEVEL = "..\\";
@@ -32,7 +35,7 @@ namespace RepositoryScanner.Scanning.StructureParsing.Parsers.Solutions
           
             foreach (var line in lines)
             {
-                var baseDirectory = Path.GetDirectoryName(path);
+                var baseDirectory = _pathReader.GetDirectoryName(path);
 
                 var match = Regex.Match(line, PROJECT_INCLUDE_REGEX);
                 if (match.Success)
@@ -49,7 +52,7 @@ namespace RepositoryScanner.Scanning.StructureParsing.Parsers.Solutions
 
                     Debug.Assert(baseDirectory != null, nameof(baseDirectory) + " != null");
 
-                    result = Path.Combine(baseDirectory, result);
+                    result = _pathReader.Combine(baseDirectory, result);
 
                     projects.Add(new Project(result, null));
                 }

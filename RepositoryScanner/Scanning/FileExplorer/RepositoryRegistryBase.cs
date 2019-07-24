@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using RepositoryScanner.Scanning.Structure;
 
 namespace RepositoryScanner.Scanning.FileExplorer
@@ -6,25 +7,9 @@ namespace RepositoryScanner.Scanning.FileExplorer
     public class RepositoryRegistryBase : IRepositoryRegistry
     {
         protected readonly List<Repository> Registry = new List<Repository>();
-        private int _index = -1;
+        private IEnumerator<Repository> _currentEnumerator;
 
-        public Repository Current
-        {
-            get => (Repository)Registry[_index].Clone();
-        }
-
-        public bool TryGetNext(out Repository repository)
-        {
-            if (_index < Registry.Count - 1)
-            {
-                _index++;
-                repository = Current;
-                return true;
-            }
-
-            repository = null;
-            return false;
-        }
+        public Repository Current => _currentEnumerator.Current;
 
         public Repository GetRepositoryFromPath(string path)
         {
@@ -32,13 +17,24 @@ namespace RepositoryScanner.Scanning.FileExplorer
             {
                 var repositoryPath = repository.Path;
 
-                if (path.StartsWith(repositoryPath))
+                if (path.ToLower().StartsWith(repositoryPath.ToLower()))
                 {
                     return new Repository(repositoryPath);
                 }
             }
 
             return null;
+        }
+
+        public IEnumerator<Repository> GetEnumerator()
+        {
+            _currentEnumerator = Registry.GetEnumerator();
+            return _currentEnumerator;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

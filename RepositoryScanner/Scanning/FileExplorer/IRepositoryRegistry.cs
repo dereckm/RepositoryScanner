@@ -1,11 +1,11 @@
-﻿using RepositoryScanner.Scanning.Structure;
+﻿using System.Collections.Generic;
+using RepositoryScanner.Scanning.Structure;
 
 namespace RepositoryScanner.Scanning.FileExplorer
 {
-    public interface IRepositoryRegistry
+    public interface IRepositoryRegistry : IEnumerable<Repository>
     {
         Repository Current { get; }
-        bool TryGetNext(out Repository repository);
         Repository GetRepositoryFromPath(string path);
     }
 }

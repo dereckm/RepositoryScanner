@@ -4,6 +4,7 @@ using System.Linq;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using RepositoryReaders.Path;
 using RepositoryReaders.Xml;
 using RepositoryScanner.Scanning.FileExplorer;
 using RepositoryScanner.Scanning.Structure;
@@ -43,9 +44,10 @@ namespace RepositoryScanner.Tests.StructureParsing
                 return _inputIndex < _testInputs.Count;
             });
             xmlReader.Setup(x => x.GetAttribute("Include")).Returns(() => _testInputs[_inputIndex]);
+            var pathReader = new DefaultPathReader();
 
 
-            _cSharpProjectParser = new CSharpProjectParser(registry.Object, xmlReader.Object);
+            _cSharpProjectParser = new CSharpProjectParser(registry.Object, xmlReader.Object, pathReader);
         }
 
         [Test]

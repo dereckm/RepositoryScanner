@@ -3,7 +3,7 @@
     public interface IFileReader
     {
         string[] ReadAllLines(string path);
-        bool Exists(string path);
+        bool FileExists(string path);
         string ReadAllText(string path);
     }
 }

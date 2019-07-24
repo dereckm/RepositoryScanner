@@ -18,8 +18,4 @@
     <ProjectReference Include="..\RepositoryScanner\RepositoryScanner.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="FileExplorer\" />
-  </ItemGroup>
-
 </Project>

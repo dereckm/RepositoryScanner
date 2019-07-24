@@ -2,6 +2,7 @@
 using Ninject.Extensions.Logging.Serilog.Infrastructure;
 using Ninject.Modules;
 using RepositoryReaders.Directory;
+using RepositoryReaders.Path;
 using RepositoryReaders.Text;
 using RepositoryReaders.Xml;
 using RepositoryScanner.Scanning.Analysis;
@@ -26,12 +27,14 @@ namespace RepositoryScanner.Scanning
             Bind<IParser<Solution>>().To<SolutionParser>();
             Bind<IRepositoryRegistry>().To<ConfigurableRepositoryRegistry>();
             Bind<IXmlReader>().To<DefaultXmlReader>();
-            Bind<IParserFactory<IParser<Project>>>().To<ProjectParserFactory>();
+            Bind<IParserFactory<Project>>().To<ProjectParserFactory>();
+            Bind<IParserFactory<Solution>>().To<SolutionParserFactory>();
             Bind<RepositoryVisitor>().To<RepositoryVisitor>();
             Bind<ProblemFinder>().To<ProblemFinder>();
             Bind<IFileReader>().To<DefaultFileReader>();
             Bind<IDirectoryReader>().To<DefaultDirectoryReader>();
             Bind<ILogger>().ToMethod((context) => new SerilogLogger("Scanner"));
+            Bind<IPathReader>().To<DefaultPathReader>();
         }
     }
 }

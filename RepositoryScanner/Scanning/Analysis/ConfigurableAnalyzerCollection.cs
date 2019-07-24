@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using RepositoryReaders.Path;
 using RepositoryReaders.Text;
 using RepositoryScanner.Scanning.Analysis.Analyzers;
 using RepositoryScanner.Scanning.Analysis.Analyzers.Files;
@@ -19,16 +20,16 @@ namespace RepositoryScanner.Scanning.Analysis
         private readonly List<IAnalyzer<CodeBase>> _structuralAnalyzers = new List<IAnalyzer<CodeBase>>();
         private readonly FileAnalyzer _fileAnalyzer;      
 
-        public ConfigurableAnalyzerCollection(IFileReader fileReader)
+        public ConfigurableAnalyzerCollection(IFileReader fileReader, IPathReader pathReader)
         {
             _fileReader = fileReader;
-            _fileAnalyzer = new FileAnalyzer(fileReader);
+            _fileAnalyzer = new FileAnalyzer(fileReader, pathReader);
             LoadConfiguration();
         }
 
         private void LoadConfiguration()
         {
-            if (!_fileReader.Exists(REPOSITORY_CONFIGURATION_FILE))
+            if (!_fileReader.FileExists(REPOSITORY_CONFIGURATION_FILE))
             {
                 throw new FileNotFoundException("The repositories.config file could not be loaded.");
             }

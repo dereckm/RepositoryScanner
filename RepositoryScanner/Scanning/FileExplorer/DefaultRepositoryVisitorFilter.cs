@@ -42,7 +42,7 @@ namespace RepositoryScanner.Scanning.FileExplorer
 
         private void LoadConfiguration()
         {
-            if (!_fileReader.Exists(REPOSITORY_CONFIGURATION_FILE))
+            if (!_fileReader.FileExists(REPOSITORY_CONFIGURATION_FILE))
             {
                 throw new FileNotFoundException("The repositories.config file could not be loaded.");
             }

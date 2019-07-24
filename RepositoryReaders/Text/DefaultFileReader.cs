@@ -9,7 +9,7 @@ namespace RepositoryReaders.Text
             return File.ReadAllLines(path);
         }
 
-        public bool Exists(string path)
+        public bool FileExists(string path)
         {
             return File.Exists(path);
         }

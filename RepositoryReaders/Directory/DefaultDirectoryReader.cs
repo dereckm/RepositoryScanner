@@ -12,6 +12,11 @@ namespace RepositoryReaders.Directory
             return System.IO.Directory.GetCurrentDirectory();
         }
 
+        public bool DirectoryExists(string path)
+        {
+            return System.IO.Directory.Exists(path);
+        }
+
         public string[] GetFiles(string path, string format)
         {
             return System.IO.Directory.GetFiles(path, format);
